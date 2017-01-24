@@ -49,11 +49,12 @@ class Source(Base):
                     self.syntax_name, syn['name'], syn['link']))
 
     def gather_candidates(self, context):
+        from denite.util import error
         shortlist = []
         for buffer in self.vim.buffers:
             if str(buffer.number) in self.vim.eval('t:tabpagebuffer').keys():
                 shortlist.append(buffer)
-        print(shortlist)
+        error(self.vim, shortlist)
 
         candidates = [
             self._convert(ba) for ba in [
